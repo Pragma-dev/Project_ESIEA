@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+
         List<String> input = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             input.add("Test" + i);
@@ -78,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<RestCovidResponse> call, Throwable t) {
                 showError();
-                t.printStackTrace();
             }
         });
     }

@@ -5,15 +5,15 @@ import java.util.List;
 
 public class RestCovidResponse {
 
-        private String Global;
+        Global Global = new Global();
         private List<Countries> Countries;
         private String Date;
 
-    public String getGlobal() {
+    public Global getGlobal() {
         return Global;
     }
 
-    public List<Countries> getCountries() {
+    public List<com.example.project_esiea.Countries> getCountries() {
         return Countries;
     }
 
