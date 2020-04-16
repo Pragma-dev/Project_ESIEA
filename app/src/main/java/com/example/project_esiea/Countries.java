@@ -5,12 +5,12 @@ public class Countries {
     private String Country;
     private String CountryCode;
     private String Slug;
-    private Integer NewConfirmed;
-    private Integer TotalConfirmed;
-    private Integer NewDeaths;
-    private Integer TotalDeaths;
-    private Integer NewRecovered;
-    private Integer TotalRecovered;
+    private String NewConfirmed;
+    private String TotalConfirmed;
+    private String NewDeaths;
+    private String TotalDeaths;
+    private String NewRecovered;
+    private String TotalRecovered;
     private String Date;
 
     public String getCountry() {
@@ -25,27 +25,27 @@ public class Countries {
         return Slug;
     }
 
-    public Integer getNewConfirmed() {
+    public String getNewConfirmed() {
         return NewConfirmed;
     }
 
-    public Integer getTotalConfirmed() {
+    public String getTotalConfirmed() {
         return TotalConfirmed;
     }
 
-    public Integer getNewDeaths() {
+    public String getNewDeaths() {
         return NewDeaths;
     }
 
-    public Integer getTotalDeaths() {
+    public String getTotalDeaths() {
         return TotalDeaths;
     }
 
-    public Integer getNewRecovered() {
+    public String getNewRecovered() {
         return NewRecovered;
     }
 
-    public Integer getTotalRecovered() {
+    public String getTotalRecovered() {
         return TotalRecovered;
     }
 

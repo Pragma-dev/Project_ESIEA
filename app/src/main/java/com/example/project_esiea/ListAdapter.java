@@ -3,6 +3,7 @@ package com.example.project_esiea;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    private List<String> values;
+    private List<Countries> values;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -20,18 +21,30 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         TextView txtHeader;
-        TextView txtFooter;
+        TextView txt1;
+        TextView txt2;
+        TextView txt3;
+        TextView txt4;
+        TextView txt5;
+        TextView txt6;
+
         View layout;
 
         ViewHolder(View v) {
             super(v);
             layout = v;
-            txtHeader = (TextView) v.findViewById(R.id.firstLine);
-            txtFooter = (TextView) v.findViewById(R.id.secondLine);
+            txtHeader = (TextView) v.findViewById(R.id.Title);
+            txt1 = (TextView) v.findViewById(R.id.Line1);
+            txt2 = (TextView) v.findViewById(R.id.Line2);
+            txt3 = (TextView) v.findViewById(R.id.Line3);
+            txt4 = (TextView) v.findViewById(R.id.Line4);
+            txt5 = (TextView) v.findViewById(R.id.Line5);
+            txt6 = (TextView) v.findViewById(R.id.Line6);
+
         }
     }
 
-    public void add(int position, String item) {
+    public void add(int position, Countries item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
@@ -42,7 +55,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<String> myDataset) {
+    public ListAdapter(List<Countries> myDataset) {
         values = myDataset;
     }
 
@@ -61,20 +74,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = values.get(position);
-        holder.txtHeader.setText(name);
-        holder.txtHeader.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                remove(position);
-            }
-        });
+        final Countries currentCountries = values.get(position);
+        holder.txtHeader.setText(currentCountries.getCountry());
 
-        holder.txtFooter.setText("Footer: " + name);
+        holder.txt1.setText("New cases today : "+currentCountries.getNewConfirmed());
+        holder.txt2.setText("Total cases : "+currentCountries.getTotalConfirmed());
+        holder.txt3.setText("New deaths today : "+currentCountries.getNewDeaths());
+        holder.txt4.setText("Total deaths : "+currentCountries.getTotalDeaths());
+        holder.txt5.setText("New recovered today : "+currentCountries.getNewRecovered());
+        holder.txt6.setText("Total recovered : "+currentCountries.getTotalRecovered());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
