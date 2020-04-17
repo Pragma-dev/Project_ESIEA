@@ -7,13 +7,175 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="52dp"
+        android:layout_height="137dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:contentDescription="TODO"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824" />
+
+    <TextView
+        android:id="@+id/Line3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Line2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/icon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/description"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/Line4"
+        app:layout_constraintStart_toEndOf="@+id/icon" />
+
+    <TextView
+        android:id="@+id/Line6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Line5"
+        android:layout_marginBottom="12dp"
+        android:layout_toEndOf="@id/icon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/description"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toEndOf="@+id/icon" />
+
+    <TextView
+        android:id="@+id/Line4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Line3"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+
+        android:layout_toEndOf="@id/icon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/description"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/Line5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toEndOf="@+id/icon" />
+
+    <TextView
+        android:id="@+id/Line5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Line4"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+
+        android:layout_toEndOf="@id/icon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/description"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/Line6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toEndOf="@+id/icon" />
+
+    <TextView
+        android:id="@+id/Line1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="5dp"
+
+        android:layout_toEndOf="@id/icon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/description"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/Line2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toEndOf="@+id/icon" />
+
+    <TextView
+        android:id="@+id/Line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Line1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@id/icon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="@string/description"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/Line3"
+        app:layout_constraintStart_toEndOf="@+id/icon" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="World statistics"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="164dp"
+        android:text="Country statistics"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/Dateid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#CFCFCF"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.048" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
