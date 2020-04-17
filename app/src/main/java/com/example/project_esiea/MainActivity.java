@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -21,6 +23,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import java.text.SimpleDateFormat;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,11 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showDate(String Date){
+    private void showDate(String Date) throws ParseException {
+
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        java.util.Date date = dt.parse(Date);
+        SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+
         text1 = (TextView)findViewById(R.id.Dateid);
-
-        text1.setText("COVID-19 Data - "+Date);
-
+        text1.setText("COVID-19 Data - "+dt1.format(date));
     }
 
     private void makeApiCall(){
@@ -101,7 +108,11 @@ public class MainActivity extends AppCompatActivity {
                     String Date  = response.body().getDate();
                     showList(Countries);
                     showGlobal(Global);
-                    showDate(Date);
+                    try {
+                        showDate(Date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     Toast.makeText(getApplicationContext(), "API Success", Toast.LENGTH_SHORT).show();
                 }else{
                     showError();

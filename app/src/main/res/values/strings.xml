@@ -2,4 +2,7 @@
     <string name="app_name">Project_ESIEA</string>
     <string name="example_application">Example application</string>
     <string name="description">Description</string>
+    <string name="world_statistics">World statistics</string>
+    <string name="country_statistics">Country statistics</string>
+    <string name="textview">TextView</string>
 </resources>
