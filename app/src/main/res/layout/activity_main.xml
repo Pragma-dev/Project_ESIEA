@@ -43,7 +43,6 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView"
         android:layout_width="27dp"

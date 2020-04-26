@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project_ESIEA</string>
+    <string name="app_name">COVID-19 Data</string>
     <string name="example_application">Example application</string>
     <string name="description">Description</string>
     <string name="world_statistics">World statistics</string>
