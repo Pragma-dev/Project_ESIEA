@@ -64,8 +64,19 @@ public class MainActivity extends AppCompatActivity {
         if(network==null || !network.isConnected()){
             //device not connected to internet
             Toast.makeText(getApplicationContext(), "Not connected to internet - outdated date", Toast.LENGTH_SHORT).show();
+
             List<Countries> countriesList = getListFromCache();
+            Global Global = getGlobalFromCache();
+            String Date  = getDateFromCache();
+
             showList(countriesList);
+            showGlobal(Global);
+            try {
+                showDate(Date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         }else {
             makeApiCall();
         }
@@ -79,6 +90,24 @@ public class MainActivity extends AppCompatActivity {
         }else {
             Type listType = new TypeToken<List<Countries>>() {}.getType();
             return gson.fromJson(countries, listType);
+        }
+    }
+    private Global getGlobalFromCache(){
+        String jsonGlobal = sharedPreferences.getString("jsonGlobal", null);
+
+        if(jsonGlobal == null){
+            return null;
+        }else {
+            return gson.fromJson(jsonGlobal, Global.class);
+        }
+    }
+    private String getDateFromCache(){
+        String jsonDate = sharedPreferences.getString("jsonDate", null);
+
+        if(jsonDate == null){
+            return null;
+        }else {
+            return gson.fromJson(jsonDate, String.class);
         }
     }
 
@@ -135,10 +164,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RestCovidResponse> call, Response<RestCovidResponse> response) {
                 if(response.isSuccessful() && response.body() != null){
+
                     List<Countries> Countries = response.body().getCountries();
                     Global Global = response.body().getGlobal();
                     String Date  = response.body().getDate();
+
                     saveList(Countries);
+                    saveGlobal(Global);
+                    saveDate(Date);
+
                     showList(Countries);
                     showGlobal(Global);
 
@@ -168,6 +202,26 @@ public class MainActivity extends AppCompatActivity {
                 .apply();
 
         Toast.makeText(getApplicationContext(), "List Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveGlobal(Global Global) {
+        String jsonString = gson.toJson(Global);
+        sharedPreferences
+                .edit()
+                .putString("jsonGlobal", jsonString)
+                .apply();
+
+        Toast.makeText(getApplicationContext(), "Global Saved", Toast.LENGTH_SHORT).show();
+    }
+
+   private void saveDate(String Date) {
+        String jsonString = gson.toJson(Date);
+        sharedPreferences
+                .edit()
+                .putString("jsonDate", jsonString)
+                .apply();
+
+        Toast.makeText(getApplicationContext(), "Date Saved", Toast.LENGTH_SHORT).show();
     }
 
     private void showError(){
