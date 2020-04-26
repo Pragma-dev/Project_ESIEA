@@ -5,6 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
@@ -12,7 +16,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private SharedPreferences sharedPreferences;
+    private Gson gson;
+
     TextView text1 = null;
     TextView text2 = null;
     TextView text3 = null;
@@ -44,7 +53,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        makeApiCall();
+
+        sharedPreferences = getSharedPreferences("covid_application", Context.MODE_PRIVATE);
+        gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        NetworkInfo network = ((ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+
+        if(network==null || !network.isConnected()){
+            //device not connected to internet
+            Toast.makeText(getApplicationContext(), "Not connected to internet - outdated date", Toast.LENGTH_SHORT).show();
+            List<Countries> countriesList = getListFromCache();
+            showList(countriesList);
+        }else {
+            makeApiCall();
+        }
+    }
+
+    private List<Countries> getListFromCache(){
+        String countries = sharedPreferences.getString("jsonCountriesList", null);
+
+        if(countries == null){
+            return null;
+        }else {
+            Type listType = new TypeToken<List<Countries>>() {}.getType();
+            return gson.fromJson(countries, listType);
+        }
     }
 
     private void showList(List<Countries> Countries) {
@@ -87,9 +122,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeApiCall(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -106,8 +138,10 @@ public class MainActivity extends AppCompatActivity {
                     List<Countries> Countries = response.body().getCountries();
                     Global Global = response.body().getGlobal();
                     String Date  = response.body().getDate();
+                    saveList(Countries);
                     showList(Countries);
                     showGlobal(Global);
+
                     try {
                         showDate(Date);
                     } catch (ParseException e) {
@@ -124,6 +158,16 @@ public class MainActivity extends AppCompatActivity {
                 showError();
             }
         });
+    }
+
+    private void saveList(List<Countries> countries) {
+        String jsonString = gson.toJson(countries);
+        sharedPreferences
+                .edit()
+                .putString("jsonCountriesList", jsonString)
+                .apply();
+
+        Toast.makeText(getApplicationContext(), "List Saved", Toast.LENGTH_SHORT).show();
     }
 
     private void showError(){
