@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Filterable {
     private List<Countries> values;
+    private List<Countries> valuesFull;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -57,6 +60,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     // Provide a suitable constructor (depends on the kind of dataset)
     public ListAdapter(List<Countries> myDataset) {
         values = myDataset;
+        valuesFull = new ArrayList<>(values);
     }
 
     // Create new views (invoked by the layout manager)
@@ -96,4 +100,39 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return values.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return valuesFilter;
+    }
+
+    private Filter valuesFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Countries> filteredList = new ArrayList<>();
+
+            if( constraint == null || constraint.length() == 0){
+                filteredList.addAll(valuesFull);
+            }else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(Countries countries : valuesFull){
+                    if(countries.getCountry().toLowerCase().contains(filterPattern)){
+                        filteredList.add(countries);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return  results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            values.clear();
+            values.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
