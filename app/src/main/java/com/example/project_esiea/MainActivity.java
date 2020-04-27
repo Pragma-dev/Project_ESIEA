@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
         }else {
             makeApiCall();
+            Toast.makeText(getApplicationContext(), "Connected to internet - data updated", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 
         text1 = (TextView)findViewById(R.id.Dateid);
-        text1.setText(dt1.format(date));
+        text1.setText("Last update : "+dt1.format(date));
     }
 
     private void makeApiCall(){
@@ -185,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(getApplicationContext(), "API Success", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "API Success", Toast.LENGTH_SHORT).show();
                 }else{
                     showError();
                 }
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 .putString("jsonCountriesList", jsonString)
                 .apply();
 
-        Toast.makeText(getApplicationContext(), "List Saved", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "List Saved", Toast.LENGTH_SHORT).show();
     }
 
     private void saveGlobal(Global Global) {
@@ -215,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                 .putString("jsonGlobal", jsonString)
                 .apply();
 
-        Toast.makeText(getApplicationContext(), "Global Saved", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Global Saved", Toast.LENGTH_SHORT).show();
     }
 
    private void saveDate(String Date) {
@@ -225,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
                 .putString("jsonDate", jsonString)
                 .apply();
 
-        Toast.makeText(getApplicationContext(), "Date Saved", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Date Saved", Toast.LENGTH_SHORT).show();
     }
 
     private void showError(){
