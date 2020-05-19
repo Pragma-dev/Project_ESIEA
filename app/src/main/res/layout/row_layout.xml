@@ -5,6 +5,12 @@
     android:padding="10dip">
 
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="22dp"
+        android:layout_height="28dp"
+        android:src="@drawable/earth" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="26dp"
