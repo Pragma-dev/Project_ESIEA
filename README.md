@@ -39,6 +39,10 @@ L'application fournit à l'utilisateur le nombre de nouveaux cas, de morts et de
   - Recherche par pattern
   
   ![Recherche pattern](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/RecherchePattern.png)
+  
+  ### Mise à jour des données en fonction de la connexion internet (Appel de l'API si le téléphone est connecté à internet, sinon on récupère le cache)
+  
+  ![Internet On](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/InternetOn.png) ![Internet Off](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/InternetOff.png)
  
   ### Icone de l'application sur Samsung Galaxy S7 Edge
   
