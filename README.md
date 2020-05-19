@@ -1,12 +1,12 @@
 # Projet application mobile : COVID-19 Data
 
-### Description du projet
+## Description du projet
 
 L'objectif de l'application est d'avoir accès simplement sur son téléphone aux données du COVID-19 de chaque pays du monde en temps réel.
 
 L'application fournit à l'utilisateur le nombre de nouveaux cas, de morts et de personnes soignées pour chaque pays (248 avec îles comprises) ainsi qu'un récapitulatif des données du monde entier et à quel moment les données ont été actualisées (Date et heure).
 
-### Consignes respectées 
+## Consignes respectées 
 
 * Affichage d'une liste dans un Recyclar View
 * Détail d'un élement 
@@ -20,13 +20,13 @@ L'application fournit à l'utilisateur le nombre de nouveaux cas, de morts et de
   - L'application vérifie à chaque ouverture si le téléphone est connecté à internet, si oui elle actualise les données avec l'API sinon elle récupère les donnes en cache et averti l'utilisateur que les données ne sont pas à jour
   - Précise la date et l'heure de l'actualisation des données par l'API
   
-### Fonctionnalités
+## Fonctionnalités
   
-  #### Ecran principal
+  ### Ecran principal
   
   ![Ecran principal](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/EcranPrincipal.png)
 
-  #### Fonction de recherche
+  ### Fonction de recherche
   
   - Barre de recherche
   
@@ -40,7 +40,7 @@ L'application fournit à l'utilisateur le nombre de nouveaux cas, de morts et de
   
   ![Recherche pattern](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/RecherchePattern.png)
  
-  #### Icone de l'application sur Samsung Galaxy S7 Edge
+  ### Icone de l'application sur Samsung Galaxy S7 Edge
   
   ![Icone application](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/IconeApplication.jpg)
 
