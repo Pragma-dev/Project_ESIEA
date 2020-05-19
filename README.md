@@ -24,21 +24,23 @@ L'application fournit à l'utilisateur le nombre de nouveaux cas, de morts et de
   
   #### Ecran principal
   
- ![Ecran principal](https://github.com/Pragma-dev/Project_ESIEA/)
+  ![Ecran principal](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/EcranPrincipal.png)
 
   #### Fonction de recherche
   
-  * Barre de recherche
-  ![Barre de recherche](https://github.com/Pragma-dev/Project_ESIEA/)
- 
-  * Recherche par pays
-  ![Barre de recherche](https://github.com/Pragma-dev/Project_ESIEA/)
+  - Barre de recherche
   
-  * Recherche par pattern
-  ![Barre de recherche](https://github.com/Pragma-dev/Project_ESIEA/)
+  ![Barre de recherche](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/BarreRecherche.png)
  
-  #### Icone application
+  - Recherche par pays
   
-  * Icone de l'application sur Samsung Galaxy S7 Edge
-  ![Barre de recherche](https://github.com/Pragma-dev/Project_ESIEA/)
+  ![Recherche pays](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/RecherchePays.png)
+  
+  - Recherche par pattern
+  
+  ![Recherche pattern](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/RecherchePattern.png)
+ 
+  #### Icone de l'application sur Samsung Galaxy S7 Edge
+  
+  ![Icone application](https://github.com/Pragma-dev/Project_ESIEA/blob/master/images_readme/IconeApplication.jpg)
 
