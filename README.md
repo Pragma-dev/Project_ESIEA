@@ -14,6 +14,10 @@ L'application fournit à l'utilisateur le nombre de nouveaux cas, de morts et de
 * Stockage de données en cache (SharedPreferences)
 * Fonctions supplémentaires : 
   - Gitflow
+  - MVC
+  - Singleton
+  - Design Patterns
+  - Principe SOLID
   - Design (Harmonie des couleurs + ajout d'images + GIF)
   - Icone application personnalisé au nom de l'application (COVID-19) avec respect des couleurs 
   - Bouton cliquable permettant le filtrage de la liste des pays (Permet une recherche par pays ou par pattern de lettres)
