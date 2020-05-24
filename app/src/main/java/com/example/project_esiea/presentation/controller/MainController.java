@@ -6,6 +6,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.project_esiea.Constants;
 import com.example.project_esiea.Singletons;
 import com.example.project_esiea.data.CovidApi;
@@ -20,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,7 +44,7 @@ public class MainController {
 
     public void onStart(){
 
-        NetworkInfo network = ((ConnectivityManager)view.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        NetworkInfo network = ((ConnectivityManager) Objects.requireNonNull(view.getSystemService(Context.CONNECTIVITY_SERVICE))).getActiveNetworkInfo();
 
         if(network==null || !network.isConnected()){
             //device not connected to internet
@@ -52,7 +55,9 @@ public class MainController {
             String Date  = getDateFromCache();
 
             view.showList(countriesList);
-            view.showGlobal(Global);
+            if (Global != null) {
+                view.showGlobal(Global);
+            }
             try {
                 view.showDate(Date);
             } catch (ParseException e) {
@@ -72,7 +77,7 @@ public class MainController {
         Call<RestCovidResponse> call = Singletons.getCovidApi().getCovidResponse();
         call.enqueue(new Callback<RestCovidResponse>() {
             @Override
-            public void onResponse(Call<RestCovidResponse> call, Response<RestCovidResponse> response) {
+            public void onResponse(@NonNull Call<RestCovidResponse> call, @NonNull Response<RestCovidResponse> response) {
                 if(response.isSuccessful() && response.body() != null){
 
                     List<Countries> Countries = response.body().getCountries();
@@ -98,7 +103,7 @@ public class MainController {
             }
 
             @Override
-            public void onFailure(Call<RestCovidResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RestCovidResponse> call, @NonNull Throwable t) {
                 view.showError();
             }
         });
@@ -161,5 +166,8 @@ public class MainController {
         }else {
             return gson.fromJson(jsonDate, String.class);
         }
+    }
+    public void onItemClick(Countries countries){
+        view.navigateToDetails(countries);
     }
 }
