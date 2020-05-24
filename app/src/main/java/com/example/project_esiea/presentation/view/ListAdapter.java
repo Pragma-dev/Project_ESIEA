@@ -11,6 +11,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_esiea.R;
@@ -19,33 +20,20 @@ import com.example.project_esiea.presentation.model.Countries;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Filterable {
     private List<Countries> values;
     private List<Countries> valuesFull;
+    private OnItemClickListener listener;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
+    public interface OnItemClickListener{
+        void onItemClick(Countries item);
+    }
     class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         TextView txtHeader;
-        TextView txt1;
-        TextView txt2;
-        TextView txt3;
-        TextView txt4;
-        TextView txt5;
-        TextView txt6;
-
         View layout;
 
         ViewHolder(View v) {
             super(v);
             layout = v;
-            txtHeader = (TextView) v.findViewById(R.id.Title);
-            txt1 = (TextView) v.findViewById(R.id.Line1);
-            txt2 = (TextView) v.findViewById(R.id.Line2);
-            txt3 = (TextView) v.findViewById(R.id.Line3);
-            txt4 = (TextView) v.findViewById(R.id.Line4);
-            txt5 = (TextView) v.findViewById(R.id.Line5);
-            txt6 = (TextView) v.findViewById(R.id.Line6);
-
+            txtHeader =  v.findViewById(R.id.Title2);
         }
     }
 
@@ -60,12 +48,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<Countries> myDataset) {
-        values = myDataset;
+    public ListAdapter(List<Countries> myDataset, OnItemClickListener listener) {
+        this.values = myDataset;
+        this.listener = listener;
         valuesFull = new ArrayList<>(values);
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(
             ViewGroup parent,
@@ -75,8 +65,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.row_layout, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -88,12 +77,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         final Countries currentCountries = values.get(position);
         holder.txtHeader.setText(currentCountries.getCountry());
 
-        holder.txt1.setText("New cases today : "+currentCountries.getNewConfirmed());
-        holder.txt2.setText("Total cases : "+currentCountries.getTotalConfirmed());
-        holder.txt3.setText("New deaths today : "+currentCountries.getNewDeaths());
-        holder.txt4.setText("Total deaths : "+currentCountries.getTotalDeaths());
-        holder.txt5.setText("New recovered today : "+currentCountries.getNewRecovered());
-        holder.txt6.setText("Total recovered : "+currentCountries.getTotalRecovered());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                listener.onItemClick(currentCountries);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

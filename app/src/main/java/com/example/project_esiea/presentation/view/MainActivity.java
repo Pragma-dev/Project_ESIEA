@@ -6,10 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,24 +16,13 @@ import android.widget.Toast;
 
 import com.example.project_esiea.R;
 import com.example.project_esiea.Singletons;
-import com.example.project_esiea.data.CovidApi;
 import com.example.project_esiea.presentation.controller.MainController;
 import com.example.project_esiea.presentation.model.Countries;
 import com.example.project_esiea.presentation.model.Global;
-import com.example.project_esiea.presentation.model.RestCovidResponse;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import java.text.SimpleDateFormat;
 
 
@@ -71,24 +57,29 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void showList(List<Countries> Countries) {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ListAdapter(Countries);
+        mAdapter = new ListAdapter(Countries, new ListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(com.example.project_esiea.presentation.model.Countries item) {
+                controller.onItemClick(item);
+            }
+        });
         recyclerView.setAdapter(mAdapter);
     }
 
     @SuppressLint("SetTextI18n")
     public void showGlobal(Global Global) {
-        text1 = (TextView)findViewById(R.id.Line1);
-        text2 = (TextView)findViewById(R.id.Line2);
-        text3 = (TextView)findViewById(R.id.Line3);
-        text4 = (TextView)findViewById(R.id.Line4);
-        text5 = (TextView)findViewById(R.id.Line5);
-        text6 = (TextView)findViewById(R.id.Line6);
+        text1 = findViewById(R.id.Line1);
+        text2 = findViewById(R.id.Line2);
+        text3 = findViewById(R.id.Line3);
+        text4 = findViewById(R.id.Line4);
+        text5 = findViewById(R.id.Line5);
+        text6 = findViewById(R.id.Line6);
 
         text1.setText("New cases today : "+Global.getNewConfirmed());
         text2.setText("Total cases : "+Global.getTotalConfirmed());
@@ -99,14 +90,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void showDate(String Date) throws ParseException {
 
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         java.util.Date date = dt.parse(Date);
-        SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 
-        text1 = (TextView)findViewById(R.id.Dateid);
-        text1.setText("Last update : "+dt1.format(date));
+        text1 = findViewById(R.id.Dateid);
+        if (date != null) {
+            text1.setText("Last update : "+dt1.format(date));
+        }
     }
 
 
@@ -137,4 +131,12 @@ public class MainActivity extends AppCompatActivity {
         });
         return true;
     }
+
+    public void navigateToDetails(Countries countries) {
+        Intent myIntent = new Intent(MainActivity.this, DetailActivity.class);
+        myIntent.putExtra("countrieKey", Singletons.getGson().toJson(countries));
+        MainActivity.this.startActivity(myIntent);
+
+    }
 }
+
