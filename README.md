@@ -21,7 +21,8 @@ L'application fournit à l'utilisateur le nombre de nouveaux cas, de morts et de
   - Design (Harmonie des couleurs + ajout d'images + GIF)
   - Icone application personnalisé au nom de l'application (COVID-19) avec respect des couleurs 
   - Bouton cliquable permettant le filtrage de la liste des pays (Permet une recherche par pays ou par pattern de lettres)
-  - L'application vérifie à chaque ouverture si le téléphone est connecté à internet, si oui elle actualise les données avec l'API sinon     elle récupère les données en cache et averti l'utilisateur que les données ne sont pas à jour
+  - Bouton permettant le retour sur le MainActivity à partir du DetailActivity 
+  - L'application vérifie à chaque ouverture et passage dans le MainActivity si le téléphone est connecté à internet, si oui elle           actualise les données avec l'API sinon elle récupère les données en cache et averti l'utilisateur que les données ne sont pas à jour
   - Précise la date et l'heure de l'actualisation des données par l'API
   
 ## Fonctionnalités
