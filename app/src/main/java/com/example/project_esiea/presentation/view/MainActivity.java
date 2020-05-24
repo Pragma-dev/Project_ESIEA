@@ -1,4 +1,4 @@
-package com.example.project_esiea;
+package com.example.project_esiea.presentation.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -14,18 +14,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project_esiea.R;
+import com.example.project_esiea.data.CovidApi;
+import com.example.project_esiea.presentation.model.Countries;
+import com.example.project_esiea.presentation.model.Global;
+import com.example.project_esiea.presentation.model.RestCovidResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;

@@ -1,4 +1,4 @@
-package com.example.project_esiea;
+package com.example.project_esiea.presentation.model;
 
 public class Countries {
 
