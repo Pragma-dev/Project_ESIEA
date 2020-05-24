@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import com.example.project_esiea.Constants;
+import com.example.project_esiea.Singletons;
 import com.example.project_esiea.data.CovidApi;
 import com.example.project_esiea.presentation.model.Countries;
 import com.example.project_esiea.presentation.model.Global;
@@ -32,7 +33,7 @@ public class MainController {
     private Gson gson;
     private MainActivity view;
 
-    public MainController(MainActivity mainActivity, Gson gson, SharedPreferences sharedPreferences) {
+    public MainController(MainActivity mainActivity,Gson gson, SharedPreferences sharedPreferences) {
         this.view = mainActivity;
         this.gson = gson;
         this.sharedPreferences = sharedPreferences;
@@ -68,14 +69,7 @@ public class MainController {
 
     private void makeApiCall(){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        CovidApi covidApi = retrofit.create(CovidApi.class);
-
-        Call<RestCovidResponse> call = covidApi.getCovidResponse();
+        Call<RestCovidResponse> call = Singletons.getCovidApi().getCovidResponse();
         call.enqueue(new Callback<RestCovidResponse>() {
             @Override
             public void onResponse(Call<RestCovidResponse> call, Response<RestCovidResponse> response) {

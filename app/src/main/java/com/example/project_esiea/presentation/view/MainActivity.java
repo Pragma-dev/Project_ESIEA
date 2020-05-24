@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project_esiea.R;
+import com.example.project_esiea.Singletons;
 import com.example.project_esiea.data.CovidApi;
 import com.example.project_esiea.presentation.controller.MainController;
 import com.example.project_esiea.presentation.model.Countries;
@@ -61,11 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         controller = new MainController(
                 this,
-                new GsonBuilder()
-                        .setLenient()
-                        .create(),
-                getSharedPreferences("covid_application", Context.MODE_PRIVATE)
-
+                Singletons.getGson(),
+                Singletons.getsharedPreferences(getApplicationContext())
         );
         controller.onStart();
 
